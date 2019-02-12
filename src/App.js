@@ -54,39 +54,32 @@ class App extends Component {
           selectedIcon: mineClick
         }
       ],
-      selectedTab: '/',
       obj: '',
-      searchShow: false,
-      hidden: false
+      hidden: false,
+      showArr: ['/','/vate','/cart','/mine']
     }
-    this.hideSearch = this.hideSearch.bind(this)
-    this.pushTolist = this.pushTolist.bind(this)
-  }
-
-  hideSearch () {
-    this.setState({
-      searchShow: false
-    })
   }
   
   componentDidMount () {
-    console.log(this.state.selectedTab)
+    // console.log(['/', '/cate', 'cart', 'mine'].indexOf(this.props.history.location.pathname) !== -1)
+    let bool = this.state.showArr.indexOf(this.props.history.location.pathname) === -1
     this.setState({
       obj: this.refs.main,
-      selectedTab: this.props.history.location.pathname
+      hidden: bool
     })
   }
 
-  pushTolist (id) {
+  componentWillReceiveProps(nextProps) { 
+    // let {id} = nextProps.match; 
+    let bool = this.state.showArr.indexOf(nextProps.location.pathname) === -1
     this.setState({
-      searchShow: false
-    }, () => {
-      this.props.history.push({pathname: '/list/' + id})
+      hidden: bool
     })
+    console.log(nextProps.location)
   }
 
   render() {
-    let { tabs, selectedTab, searchShow } = this.state
+    let { tabs } = this.state
     let {history} = this.props
     return (
       <div className="app">
@@ -96,12 +89,12 @@ class App extends Component {
           <Route path="/cate" component={Cate} exact/>
           <Route path="/cart" component={Cart} exact />
           <Route path="/mine" component={Mine} exact />
+          <Route path="/search" component={Search} exact />
           <Route path="/list/:keyword" component={Goodlist} exact />
           <Route path="/details/:id" component={Details} exact/>
           <Route component={err}/>
         </Switch>
         </div>
-        <Search show={searchShow} hide={this.hideSearch} push={this.pushTolist}/>
         <footer id="footer" style={{display: this.state.hidden ? 'none' : 'block'}}>
           <TabBar
             unselectedTintColor="#949494"

@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 import './index.scss'
 
 import { NavBar } from 'antd-mobile';
@@ -26,6 +27,7 @@ class Cart extends React.Component {
           rightContent={[<span key={'change'} flg={flg} className="editor-txt">{flg === "true" ? '编辑全部' : '完成'}</span>]}
         >购物车</NavBar>
         <div className="mtop">
+          <CartItem />
           <CartItem />
         </div>
       </div>

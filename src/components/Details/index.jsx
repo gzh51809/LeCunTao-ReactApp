@@ -1,7 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
 
-import { Carousel } from 'antd-mobile'
+import { Carousel, Modal } from 'antd-mobile'
 import FixBar from '../tools/FixBar'
 
 import './index.scss'
@@ -28,49 +28,29 @@ class Details extends React.Component {
       },
       obj: '',
       recommendGoods: [],
-      xyArr: [0]
+      xyArr: [0],
+      modal2: false,
+      loadKey: true
     }
     this.toXy = this.toXy.bind(this)
     this.toRecommendGood = this.toRecommendGood.bind(this)
+    this.requestGoodMess = this.requestGoodMess.bind(this)
   }
 
-  requestMess () {
-    
-  }
-
-  componentDidMount() {
-    console.log(this.props.match)
+  requestGoodMess (id) {
+    this.refs.obj.scrollTop = 0
+    let loadKey = this.loadKey
+    if (loadKey === false) return
     this.setState({
-      obj: this.refs.obj
-    })
-    // 请求商品信息
-    Axios({
-      method: 'post',
-      url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549852050174&act=mobile_goods_detail&op=getGoodsInfo',
-      data: {
-        city_id: 140100000000,
-        province_id: 140,
-        goods_id: this.props.match.params.id,
-        key: ""
-      },
-      transformRequest: [function (data) {
-        let ret = ''
-        for (let it in data) {
-          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-        }
-        return ret
-      }],
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }).then(res => {
-      // 请求店铺信息
+      loadKey: false
+    }, () => {
       Axios({
         method: 'post',
-        url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549855579695&act=mobile_goods_detail&op=getDetailData',
+        url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549852050174&act=mobile_goods_detail&op=getGoodsInfo',
         data: {
-          common_id: res.data.datas.goods_info.goods_commonid,
-          goods_id: res.data.datas.goods_info.goods_id,
+          city_id: 140100000000,
+          province_id: 140,
+          goods_id: id,
           key: ""
         },
         transformRequest: [function (data) {
@@ -84,63 +64,103 @@ class Details extends React.Component {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(res => {
-        console.log(res.data.datas)
-        if(this.props.history.location.pathname.indexOf('/details') === -1) return
-        this.setState({
-          store_Mess: res.data.datas
-        })
-      }).catch(err => {console.log(err)})
-
-      // 请求推荐信息
-      Axios({
-        method: 'post',
-        url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549871421874&act=mobile_goods_detail&op=getRecommentDetail',
-        data: {
-          gc_id: res.data.datas.goods_info.gc_id,
-          province_id: 140,
-          city_id: 140100000000,
-          key: ''
-        },
-        transformRequest: [function (data) {
-          let ret = ''
-          for (let it in data) {
-            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        // 请求店铺信息
+        Axios({
+          method: 'post',
+          url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549855579695&act=mobile_goods_detail&op=getDetailData',
+          data: {
+            common_id: res.data.datas.goods_info.goods_commonid,
+            goods_id: res.data.datas.goods_info.goods_id,
+            key: ""
+          },
+          transformRequest: [function (data) {
+            let ret = ''
+            for (let it in data) {
+              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            }
+            return ret
+          }],
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
           }
-          return ret
-        }],
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }).then(res => {
-        let arr = res.data.datas.recommendGoods
-        arr = arr.length > 6 ? arr.slice(0,6) : arr
-        let xyArr = this.state.xyArr
-        xyArr.push(this.refs.xiangqing.offsetTop)
-        xyArr.push(this.refs.tuijian.offsetTop)
-        if(this.props.history.location.pathname.indexOf('/details') === -1) return
-        this.setState({
-          recommendGoods: arr,
-          xyArr
+        }).then(res => {
+          if(this.props.history.location.pathname.indexOf('/details') === -1) return
+          this.setState({
+            store_Mess: res.data.datas
+          })
+        }).catch(err => {console.log(err)})
+  
+        // 请求推荐信息
+        Axios({
+          method: 'post',
+          url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549871421874&act=mobile_goods_detail&op=getRecommentDetail',
+          data: {
+            gc_id: res.data.datas.goods_info.gc_id,
+            province_id: 140,
+            city_id: 140100000000,
+            key: ''
+          },
+          transformRequest: [function (data) {
+            let ret = ''
+            for (let it in data) {
+              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            }
+            return ret
+          }],
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then(res => {
+          let arr = res.data.datas.recommendGoods
+          arr = arr.length > 6 ? arr.slice(0,6) : arr
+          let xyArr = [0]
+          xyArr.push(this.refs.xiangqing.offsetTop-120)
+          xyArr.push(this.refs.tuijian.offsetTop)
+          if(this.props.history.location.pathname.indexOf('/details') === -1) return
+          this.setState({
+            recommendGoods: arr,
+            xyArr
+          })
+        }).catch(err => console.log(err))
+  
+        // 处理商品信息
+        let data = res.data.datas.img_list.map(item => {
+          return item.goods_image
         })
-        console.log(xyArr)
-      }).catch(err => console.log(err))
-
-      // 处理商品信息
-      let data = res.data.datas.img_list.map(item => {
-        return item.goods_image
+        let num = 1
+        if (data.length === 0) num = 0 
+        if(this.props.history.location.pathname.indexOf('/details') === -1) return
+        console.log(res.data.datas.goods_info)
+        this.setState({
+          data,
+          imgIndex: num,
+          imgAll: data.length,
+          goodInfo: res.data.datas.goods_info,
+          goods_spec: res.data.datas.goods_info.goods_spec,
+          loadKey: true
+        })
+      }).catch(err => {
+        console.log(err)
+        this.setState({
+          loadKey: true
+        })
       })
-      let num = 1
-      if (data.length === 0) num = 0 
-      if(this.props.history.location.pathname.indexOf('/details') === -1) return
-      this.setState({
-        data,
-        imgIndex: num,
-        imgAll: data.length,
-        goodInfo: res.data.datas.goods_info,
-        goods_spec: res.data.datas.goods_info.goods_spec
-      })
-    }).catch(err => {console.log(err)})
+    })
   }
+
+  componentDidMount() {
+    this.setState({
+      obj: this.refs.obj
+    })
+    // 请求商品信息
+    this.requestGoodMess(this.props.match.params.id)
+  }
+
+  componentWillReceiveProps(nextProps) { 
+    let {id} = nextProps.match.params;  
+    // 请求详情页数据 
+    this.requestGoodMess(id)
+  } 
 
   // 点击头部导航跳转到指定位置
   toXy (index) {
@@ -154,6 +174,19 @@ class Details extends React.Component {
 
   toRecommendGood (id) {
     this.props.history.replace({pathname:"/details/" + id})
+  }
+
+  showModal = key => (e) => {
+    e.preventDefault(); // 修复 Android 上点击穿透
+    this.setState({
+      modal2: true,
+    });
+  }
+
+  onClose = key => () => {
+    this.setState({
+      modal2: false,
+    });
   }
 
   render () {
@@ -284,9 +317,24 @@ class Details extends React.Component {
             </div>
             <span className="focus-info">购物车</span>
           </div>
-          <div className="shopping-cart">加入购物车</div>
+          <div className="shopping-cart" onClick={this.showModal('modal2')}>加入购物车</div>
           <div className="shopping-buy">立即购买</div>
         </footer>
+        <Modal
+          popup
+          visible={this.state.modal2}
+          onClose={this.onClose('modal2')}
+          animationType="slide-up"
+        >
+          <div className="popup-pos">
+            <div className="popup-pos"></div>
+            <div className="popup-shop">
+              <div className="img">
+                <img src="" alt=""/>
+              </div>
+            </div>
+          </div>
+        </Modal>
       </div>
     )
   }

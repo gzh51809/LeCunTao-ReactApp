@@ -26,9 +26,11 @@ class Search extends React.Component {
       selectShow: false,
       selectContent: '',
       hotItem: [],
-      hisItem: ['sss']
+      hisItem: []
     }
     this.changeSelect = this.changeSelect.bind(this)
+    this.go = this.go.bind(this)
+    this.pushToList = this.pushToList.bind(this)
   }
 
   componentDidMount () {
@@ -36,6 +38,7 @@ class Search extends React.Component {
       method: 'post',
       url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549698503924&act=goods&op=hotWord'
     }).then(res => {
+      if(this.props.history.location.pathname.indexOf('/search') === -1) return
       this.setState({
         hotItem: res.data.datas.list
       })
@@ -50,14 +53,28 @@ class Search extends React.Component {
     })
   }
 
+  // 返回上一页
+  go () {
+    this.props.history.goBack()
+  }
+
+  // 搜索关键词
+  pushToList (keyword) {
+    if (keyword) {
+      // let se = sessionStorage.getItem('history')
+      // se = se + "-" + keyword
+      // sessionStorage.setItem('history', se)
+      this.props.history.push({pathname:"/list/" + keyword})
+    }
+  }
+
   render () {
-    let { show, hide, push } = this.props
     let { selectList, selectIndex, selectShow, selectContent, hotItem, hisItem } = this.state
     return (
-      <div className="search" style={{display: show ? 'block' : 'none'}}>
+      <div className="search">
         <div className="searchTop">
-          <div className="closeSearch" onClick={hide}>
-            <img src={closeImg} alt=""/>
+          <div className="closeSearch" onClick={this.go}>
+            <img src={closeImg} alt="" />
           </div>
           <div className="searchBody">
             <div className="left">
@@ -94,7 +111,8 @@ class Search extends React.Component {
             </div>
           </div>
           <span className="btn" onClick={() => {
-            push(this.state.selectContent)
+            // 搜索搜索框的关键词
+            this.pushToList(this.state.selectContent)
           }}>搜索</span>
         </div>
         <div className='hotSearch'>
@@ -106,7 +124,8 @@ class Search extends React.Component {
               hotItem.map((item,index) => {
                 return (
                   <li key={index} onClick={() => {
-                    push(item)
+                    // 搜索热词
+                    this.pushToList(item)
                   }}>{item}</li>
                 )
               })
@@ -128,7 +147,10 @@ class Search extends React.Component {
             {
               hisItem.map((item,index) => {
                 return (
-                  <li key={index}>{item}</li>
+                  <li key={index} onClick={
+                    // 搜索历史搜索
+                    this.pushToList(item)
+                  }>{item}</li>
                 )
               })
             }

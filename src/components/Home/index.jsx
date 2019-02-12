@@ -208,7 +208,9 @@ class Home extends React.Component {
     
     return (
       <div id="home" ref='home'>
-        <Search addrName={addrName} toRed={toRed}/>
+        <Search addrName={addrName} toRed={toRed} toSearch={() => {
+          this.props.history.push('/search')
+        }}/>
         <Carousel
           dotStyle={{
             background: '#000',

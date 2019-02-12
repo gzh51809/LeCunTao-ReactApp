@@ -67,7 +67,7 @@
           // width: 80%;
           background: #f7f7f7;
           padding-left: 0.18rem;
-          input {
+          >input {
             margin-top: 0.88rem;
             float: left;
             display: none;
@@ -128,6 +128,63 @@
                   display: block;
                   font-size: 0.3rem;
                   color: #f81234;
+                }
+              }
+              .quantity-wrapper {
+                height: 0.6rem;
+                background: #f0f0f0;
+                border-radius: 0.08rem;
+                float: right;
+                margin-top: 0.12rem;
+                .quantity-decrease1, .quantity-decrease2 {
+                  display: block;
+                  float: left;
+                  width: 0.62rem;
+                  height: 100%;
+                  border-radius: 0.003rem 0 0 0.03rem;
+                  position: relative;
+                }
+                .quantity-decrease1 {
+                  border-right: 0.02rem solid #fff;
+                  background: #f7f7f7;
+                  .reduce1 {
+                    background: url('../../assets/img/reduce1.png') no-repeat;
+                    width: 0.22rem;
+                    height: 0.04rem;
+                    background-size: 100%;
+                    display: block;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin-top: -0.02rem;
+                    margin-left: -0.11rem;
+                    z-index: 10;
+                  }
+                }
+                .quantity {
+                  float: left;
+                  width: 0.78rem;
+                  border: none;
+                  line-height: 0.6rem;
+                  text-align: center;
+                  background: #f0f0f0;
+                  font-size: 0.26rem;
+                  color: #333;
+                }
+                .quantity-decrease2 {
+                  border-left: 0.02rem solid #fff;
+                  .plus {
+                    background: url('../../assets/img/add.png') no-repeat;
+                    width: 0.22rem;
+                    height: 0.22rem;
+                    background-size: 100%;
+                    display: block;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin-top: -0.11rem;
+                    margin-left: -0.11rem;
+                  }
                 }
               }
             }
