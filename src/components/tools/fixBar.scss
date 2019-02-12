@@ -1,0 +1,20 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+.fixBar {
+  position: fixed;
+  right: r(10px);
+  bottom: 2.4rem;
+  width: 1.05rem;
+  >div {
+    height: 1.05rem;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .chat {
+    margin-bottom: r(10px);
+  }
+}

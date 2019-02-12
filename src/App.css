@@ -1,0 +1,30 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#main {
+  flex: 1 ;
+  overflow-x: hidden;
+  font-size: 1rem;
+  word-wrap: break-word;
+  word-break: normal;
+}
+
+/* main::-webkit-scrollbar {
+  display: none;
+} */
+
+#footer {
+  height: 1.02rem;
+}
+#footer .am-tabs-tab-bar-wrap {
+  height: 100%;
+}
+#footer .am-tab-bar-bar {
+  height: 100%;
+}
+#footer .am-tab-bar-tab-title {
+  font-size: 0.22rem
+}

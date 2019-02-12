@@ -1,0 +1,26 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+.cart {
+  height: 100%;
+  // background: #fff;
+  .am-navbar {
+    height: 0.96rem;
+    border-bottom: 0.02rem solid #ccc;
+    .am-navbar-title {
+      color: #4c4c4c;
+      font-size: 0.36rem;
+    }
+  }
+  .hd_icon_ret {
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url('../../assets/img/btn_back.png') no-repeat;
+    background-size: 100%;
+  }
+  .editor-txt {
+    font-size: 0.34rem;
+    color: #4c4c4c;
+  }
+}

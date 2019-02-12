@@ -1,0 +1,98 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+.categoods {
+  .goodBox {
+    .goodTitle {
+      height: r(35px);
+      line-height: r(35px);
+      .title {
+        float: left;
+        font-size: .24rem;
+        color: #333;
+        line-height: r(35px);
+      }
+      i {
+        float: left;
+        height: r(13px);
+        width: r(3px);
+        background: #ff4e67;
+        vertical-align: middle;
+        margin-right: r(10px);
+        margin-top: r(11px);
+      }
+      .toMore {
+        float: right;
+        font-size: .24rem;
+        color: #999;
+        img {
+          width: r(12px);
+          height: r(12px);
+          vertical-align: middle;
+          margin: r(-3px) r(8px) 0;
+        }
+      }
+    }
+    .goodTitle::after {
+      content: '';
+      display: block;
+      clear: both;
+      height: 0;
+    }
+    .goodList {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      overflow: hidden;
+      background: #fff;
+      li {
+        width: r(186.5px);
+        border-bottom: 0.01rem solid #f0f0f0;
+        .goodImg {
+          img {
+            display: block;
+            width: r(150px);
+            height: r(150px);
+            margin: r(15px) auto r(20px);
+          }
+        }
+        .goodName {
+          font-size: .26rem;
+          -webkit-line-clamp: 2;
+          /* autoprefixer: off; */
+          -webkit-box-orient: vertical;
+
+          overflow: hidden;
+          display: -webkit-box;
+          height: 0.72rem;
+          line-height: 0.36rem;
+          margin-left: .2rem;
+          margin-right: .2rem;
+        }
+        .goodMess {
+          padding: .20rem .2rem;
+          .goodPrice {
+            color: rgb(242,48,48);
+            font-size: .3rem;
+            float: left;
+          }
+          .saleNum {
+            float: right;
+            color: rgb(153,153,153);
+            font-size: .22rem;
+          }
+        }
+        .goodMess::after {
+          content: '';
+          display: block;
+          height: 0;
+          clear: both;
+        } 
+      }
+      li:nth-child(odd) {
+        border-right: 0.01rem solid #f0f0f0;
+      }
+    }
+  }
+}

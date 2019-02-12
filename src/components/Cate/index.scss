@@ -1,0 +1,53 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+#cate {
+  background-color: #fff;
+  height: 100%;
+  .cateBody {
+    border-top: r(1px) solid #ccc;
+    display: flex;
+    .cateName {
+      font-size: 0.3rem;
+      color: #333;
+      width: r(87.5px);
+      li {
+        background-color: #f0f0f0;
+        height: 0.9rem;
+        line-height: 0.9rem;
+        text-align: center;
+      }
+      .active {
+        background-color: #fff;
+        color: #f81234;
+      }
+    }
+    .cateContent {
+      flex: 1;
+      li {
+        float: left;
+        width: 1.81rem;
+        height: auto;
+        .imgBox {
+          img {
+            width: r(90.5px);
+            height: r(90.5px);
+          }
+        }
+        p {
+          font-size: 0.26rem;
+          text-align: center;
+          height: 0.8rem;
+          line-height: 0.8rem;
+        }
+      }
+    }
+    .cateContent::after {
+      content: '';
+      height: 0;
+      clear: both;
+      display: block;
+    }
+  }
+}

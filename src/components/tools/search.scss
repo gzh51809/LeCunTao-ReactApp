@@ -1,0 +1,26 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+.topSearch {
+  
+  width: 100%;
+  .searchBox {
+    height: r(60px);
+    line-height: r(60px);
+    font-size: 0.3rem;
+    padding-left: 5%;
+    input {
+      font-size: 0.3rem;
+      -webkit-appearance: none;
+      border-radius: 0.3rem;
+      -webkit-border-radius: 0.3rem;
+      width: r(302.81px);
+      height: 0.6rem;
+      background-color: #f2f2f2;
+      margin-top: -0.1rem;
+      margin-right: 0.2rem;
+      text-indent: 5%;
+    }
+  }
+}

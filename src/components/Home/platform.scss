@@ -1,0 +1,25 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+#platform {
+  height: r(100px);
+  background: #fff;
+  display: flex;
+  li {
+    flex: 1;
+    text-align: center;
+    a {
+      color: rgb( 85,85,85);
+      display: block;
+      height: 100%;
+      font-size: .26rem;
+      img {
+        width: r(40px);
+        height: r(40px);
+        margin-top: 0.3rem;
+        margin-bottom: 0.2rem;
+      }
+    }
+  }
+}

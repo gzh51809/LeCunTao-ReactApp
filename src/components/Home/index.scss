@@ -1,0 +1,49 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+#home{
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cate .fix {
+  position: fixed;
+  top: r(40px);
+  left: 0;
+  width: 100%;
+}
+
+.cateTitle {
+  background: #f0f0f0;
+  display: flex;
+  li {
+    flex: 1;
+    height: r(47px);
+    display: flex;
+    align-items: center;
+    background: #fff;
+    // line-height: r(47px);
+    h3 {
+      font-size: .28rem;
+      color: #fff;
+      font-weight: normal;
+      height: r(23px);
+      line-height: r(23px);
+      flex: 1;
+      border-radius: .36rem;
+      span {
+        display: block;
+        text-align: right;
+        padding-right: r(10px);
+        margin-left: r(5px)
+      }
+    }
+    .notActive {
+      color: rgb(51,51,51);
+    }
+  }
+}

@@ -1,0 +1,66 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+.homeSearch {
+  height: r(40px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  .searchLeft {
+    width: r(77px);
+    height: r(28px);
+    line-height: r(28px);
+    font-size: 0;
+    .addrLogo {
+      display: inline-block;
+      width: r(12px);
+      height: 15px;
+      background: url("../../assets/img/icon_dingwei.png") no-repeat center center;
+      background-size: contain;
+      margin-bottom: r(-3px);
+    }
+    span {
+      display: inline-block;
+      width: r(60px);
+      height: (26px);
+      font-size: 0.28rem;
+      color: #fff;
+      text-align: center;
+    }
+    .inIcon {
+      display: inline-block;
+      width: r(5px);
+      height: r(10px);
+      background: url('../../assets/img/right-white.png') no-repeat center center;
+      background-size: contain;
+    }
+  }
+  .searchRight {
+    width: r(262px);
+    height: r(30px);
+    font-size: 0;
+    background: #fff;
+    border-radius: 0.28rem;
+    .searchLogo {
+      display: inline-block;
+      width: r(14.5px);
+      height: r(15px);
+      background: url('../../assets/img/iconSousuoBlack.png') no-repeat center center;
+      background-size: 100%;
+      vertical-align: middle;
+      margin: 0 r(10px);
+    }
+    input {
+      width: r(210px);
+      height: r(30px);
+      color: #eee;
+      font-size: r(14px);
+    }
+  }
+}

@@ -1,0 +1,192 @@
+@function r($px) {
+  @return $px / 50px * 1rem;
+}
+
+.search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 101;
+  background-color: #fff;
+  .searchTop {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    align-items: center;
+    .closeSearch {
+      display: inline-block;
+      width: 10%;
+      height: 0.8rem;
+      line-height: 0.8rem;
+      text-align: center;
+      img {
+        width: 0.24rem;
+        height: 0.24rem;
+      }
+    }
+    .searchBody {
+      background-color: #f2f2f2;
+      width: 76%;
+      border-radius: 0.7rem;
+      display: -webkit-flex; /* Safari */
+      display: flex;
+      height: r(32px);
+      line-height: r(32px);
+      margin-top: 0.2rem;
+      .left {
+        width: 27%;
+        height: r(20px);
+        line-height: 0.3rem;
+        font-size: 0.32rem;
+        color: #808080;
+        border-right: 0.02rem solid #ccc;
+        margin-top: r(6px);
+        position: relative;
+        .selectBtn {
+          >span {
+            margin-left: 0.3rem;
+            vertical-align: middle;
+          }
+          i {
+            display: inline-block;
+            background: url('../../assets/img/icon_shaixuan_arrowdown.png') no-repeat center center;
+            background-size: contain;
+            width: r(15px);
+            height: r(15px);
+            margin-left: r(3.5px);
+            // margin-top: 0.06rem;
+            vertical-align: middle;
+          }
+        }
+        .selectList {
+          // display: none;
+          position: absolute;
+          left: 0.2rem;
+          top: 0.6rem;
+          background: rgb(62,62,62);
+          width: 2rem;
+          li {
+            width: 80%;
+            height: r(52px);
+            margin: 0 auto;
+            line-height: r(52px);
+            color: #fff;
+            img {
+              width: 0.35rem;
+              height: 0.35rem;
+              margin-left: r(10px);
+            }
+            span {
+              margin-left: r(12px);
+              font-size: 0.3rem;
+              vertical-align: middle;
+            }
+          }
+          li:first-child {
+            border-bottom: 1px solid #fff;
+          }
+        }
+      }
+      .right {
+        padding-left: r(11.5px);
+        position: relative;
+        input {
+          width: r(172.39px);
+          height: 0.4rem;
+          font-size: 0.3rem;
+          background-color: #f2f2f2;
+          vertical-align: top;
+          margin-top: r(6px);
+        }
+        i {
+          position: absolute;
+          right: r(-15px);
+          top: r(12px);
+          display: block;
+          width: 0.2rem;
+          height: 0.2rem;
+          background: url('../../assets/img/icon_sousuo_close.png') no-repeat center center;
+          background-size: contain;
+        }
+      }
+    }
+    .btn {
+      font-size: 0.28rem;
+      margin-left: 3%;
+      margin-top: r(9px);
+      display: inline-block;
+    }
+  }
+  .hotSearch {
+    padding-left: 0.22rem;
+    margin-top: r(10px);
+    .hotTitle {
+      font-size: 0.3rem;
+      span {
+        font-size: 0.26rem;
+        color: red;
+      }
+    }
+    .hotItem {
+      padding-top: 0.1rem;
+      li {
+        float: left;
+        border-radius: 0.26rem;
+        -webkit-border-radius: 0.26rem;
+        padding: 0.14rem 0.3rem;
+        font-size: 0.28rem;
+        border: 0.02rem solid #959595;
+        margin-right: 0.2rem;
+        margin-bottom: 0.2rem;
+      }
+    }
+    .hotItem::after {
+      content: '';
+      height: 0;
+      clear: both;
+      display: block;
+    }
+  }
+  .history {
+    .hisTitle {
+      font-size: 0.28rem;
+      line-height: 0.8rem;
+      padding: 0 r(12px);
+      color: #808080;
+      border-bottom: 0.02rem solid #f0f0f0;
+      >span {
+        float: left;
+      }
+      >div {
+        float: right;
+        i {
+          display: inline-block;
+          width: 0.3rem;
+          height: 0.3rem;
+          background: url('../../assets/img/idel.png') no-repeat center center;
+          background-size: contain;
+          margin-right: 0.08rem;
+          margin-bottom: r(-2px);
+        }
+      }
+    }
+    .hisTitle::after {
+      content: '';
+      display: block;
+      height: 0;
+      clear: both;
+    }
+    .hisItem {
+      li {
+        width: 97%;
+        height: 0.78rem;
+        border-bottom: 0.02rem solid #f0f0f0;
+        margin-left: 3%;
+        line-height: 0.78rem;
+        color: #333;
+        font-size: 0.32rem;
+      }
+    }
+  }
+}
