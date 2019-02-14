@@ -416,3 +416,225 @@
     }
   }
 }
+
+.am-modal-content {
+  background: none;
+}
+
+#popup-pos {
+  .popup-close {
+    width: 0.3rem;
+    height: 0.3rem;
+    background: url('../../assets/img/close.png') no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 0.18rem;
+    top: 1.18rem;
+  }
+  .top {
+    position: relative;
+    padding-top: 1rem;
+  }
+  .popup-shop {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 0.18rem 0.15rem 0.2rem;
+    background: #fff;
+    .img {
+      float: left;
+      width: 2.08rem;
+      height: 2.08rem;
+      position: relative;
+      img {
+        width: 2.08rem;
+        height: 2.08rem;
+        position: absolute;
+        left: 0;
+        top: -0.4rem;
+        z-index: 15;
+        display: block;
+        border: 0.02rem solid #eaeaea;
+        border-radius: 0.2rem;
+      }
+    }
+    .message {
+      float: right;
+      width: r(247px);
+      text-align: left;
+      .popup-price {
+        color: #f81234;
+        font-weight: bold;
+        font-size: 0.36rem;
+        display: block;
+        margin-top: 0.16rem;
+      }
+      em {
+        font-style: normal;
+      }
+      .popup-stock {
+        display: block;
+        color: #808080;
+        font-size: 0.26rem;
+        margin-top: 0.05rem;
+      }
+      .popup-cont {
+        font-size: 0.24rem;
+        margin-top: 0.08rem;
+        color: #333;
+        margin-top: 0.1rem;
+        display: block;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        display: -webkit-box;
+      }
+    }
+  }
+  .popup-shop::after {
+    content: '';
+    height: 0;
+    display: block;
+    clear: both;
+  }
+  .parmas {
+    height: r(237px);
+    overflow-y: auto;
+    background: #fff;
+    text-align: left;
+    .mes {
+      border-top: r(1px) solid #eaeaea;
+      .title {
+        color: #333;
+        padding-left: 2.5%;
+        margin-right: 0.18rem;
+        border-top: 0.02rem solid #eaeaea;
+        width: 97.5%;
+        margin-bottom: 0.22rem;
+        padding-top: 0.2rem;
+        font-size: 0.32rem;
+      }
+      .item {
+        overflow: hidden;
+        span {
+          font-size: 0.24rem;
+          color: #333;
+          margin-bottom: 0.16rem;
+          padding: 0.12rem 0.2rem;
+          border-radius: 0.08rem;
+          background: #f0f0f0;
+          margin-left: 0.14rem;
+          display: block;
+          float: left;
+        }
+        .active {
+          background: #f81234;
+          color: #fff;
+        }
+      }
+    }
+    .popup-count {
+      overflow: hidden;
+      width: 97.5%;
+      padding-left: 2.5%;
+      border-top: 0.02rem solid #eaeaea;
+      border-bottom: 0.02rem solid #eaeaea;
+      height: 1.1rem;
+      .popup-ctl {
+        float: left;
+        width: 60%;
+        overflow: hidden;
+        .popup-txt2 {
+          color: #333;
+          line-height: 1rem;
+          float: left;
+          width: 1.1rem;
+          font-size: 0.32rem;
+        }
+        .x-mgt {
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          display: -webkit-box;
+          line-height: 0.36rem;
+          font-size: .24rem;
+          float: left;
+          width: 3.1rem;
+          margin-top: .2rem;
+          height: 0.75rem;
+        }
+      }
+      .quantity-wrapper {
+        width: 2.08rem;
+        height: 0.6rem;
+        background: #f0f0f0;
+        margin-right: 5%;
+        border-radius: 0.08rem;
+        float: right;
+        margin-top: 0.28rem;
+        .quantity-decrease1, .quantity-decrease2 {
+          display: block;
+          float: left;
+          width: 0.62rem;
+          height: 100%;
+          border-radius: 0.03rem 0 0 0.03rem;
+          position: relative;
+        }
+        .quantity-decrease1 {
+          border-right: 0.02rem solid #fff;
+          background: #f7f7f7;
+          .reduce1 {
+            background: url('../../assets/img/reduce1.png') no-repeat;
+            width: 0.22rem;
+            height: 0.04rem;
+            background-size: 100%;
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -0.02rem;
+            margin-left: -0.11rem;
+            z-index: 10;
+          }
+        }
+        .quantity {
+          float: left;
+          width: 0.78rem;
+          border: none;
+          line-height: 0.6rem;
+          text-align: center;
+          background: #f0f0f0;
+          font-size: 0.26rem;
+          color: #333;
+        }
+        .quantity-decrease2 {
+          border-left: 0.02rem solid #fff;
+          .plus {
+            background: url('../../assets/img/add.png') no-repeat;
+            width: 0.22rem;
+            height: 0.22rem;
+            background-size: 100%;
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -0.11rem;
+            margin-left: -0.11rem;
+          }
+        }
+      }
+    }
+  }
+  .sure {
+    background: #fff;
+    padding-top: r(20px);
+    span {
+      display: block;
+      height: r(50px);
+      line-height: r(50px);
+      color: #fff;
+      text-align: center;
+      font-size: 0.32rem;
+      background: #f64750;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import './App.css'
 import { Switch, Route, withRouter} from 'react-router-dom'
 
@@ -56,7 +57,7 @@ class App extends Component {
       ],
       obj: '',
       hidden: false,
-      showArr: ['/','/vate','/cart','/mine']
+      showArr: ['/','/cate','/cart','/mine']
     }
   }
   
@@ -75,7 +76,6 @@ class App extends Component {
     this.setState({
       hidden: bool
     })
-    console.log(nextProps.location)
   }
 
   render() {

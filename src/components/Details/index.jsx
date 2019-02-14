@@ -30,15 +30,18 @@ class Details extends React.Component {
       recommendGoods: [],
       xyArr: [0],
       modal2: false,
-      loadKey: true
+      loadKey: true,
+      addToCart: {
+        num: 1
+      }
     }
     this.toXy = this.toXy.bind(this)
     this.toRecommendGood = this.toRecommendGood.bind(this)
     this.requestGoodMess = this.requestGoodMess.bind(this)
+    this.changeNum = this.changeNum.bind(this)
   }
 
   requestGoodMess (id) {
-    this.refs.obj.scrollTop = 0
     let loadKey = this.loadKey
     if (loadKey === false) return
     this.setState({
@@ -64,6 +67,7 @@ class Details extends React.Component {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(res => {
+        this.refs.obj.scrollTop = 0
         // 请求店铺信息
         Axios({
           method: 'post',
@@ -84,6 +88,7 @@ class Details extends React.Component {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }).then(res => {
+          console.log(res)
           if(this.props.history.location.pathname.indexOf('/details') === -1) return
           this.setState({
             store_Mess: res.data.datas
@@ -156,8 +161,10 @@ class Details extends React.Component {
     this.requestGoodMess(this.props.match.params.id)
   }
 
-  componentWillReceiveProps(nextProps) { 
-    let {id} = nextProps.match.params;  
+  componentWillReceiveProps(nextProps) {
+    // if (nextProps.history) return
+    let {id} = nextProps.match.params;
+    console.log(nextProps)
     // 请求详情页数据 
     this.requestGoodMess(id)
   } 
@@ -189,8 +196,22 @@ class Details extends React.Component {
     });
   }
 
+  changeNum (str) {
+    console.log(str)
+    let addToCart = this.state.addToCart
+    if (str === "add") {
+      addToCart['num'] = ++addToCart.num
+    }
+    if (str === "sub") {
+      addToCart['num'] = addToCart['num'] > 1 ? --addToCart['num'] : addToCart['num']
+    }
+    this.setState({
+      addToCart
+    })
+  }
+
   render () {
-    let { topList, topActive, imgIndex, imgAll, goodInfo, store_Mess, checkGood, recommendGoods } = this.state
+    let { topList, topActive, imgIndex, imgAll, goodInfo, store_Mess, checkGood, recommendGoods, addToCart } = this.state
     return (
       <div className="details" ref="obj">
         <div className="top">
@@ -326,12 +347,62 @@ class Details extends React.Component {
           onClose={this.onClose('modal2')}
           animationType="slide-up"
         >
-          <div className="popup-pos">
-            <div className="popup-pos"></div>
-            <div className="popup-shop">
-              <div className="img">
-                <img src="" alt=""/>
+          <div id="popup-pos">
+            <div className="top">
+              <div className="popup-close" onClick={this.onClose('modal2')}></div>
+              <div className="popup-shop">
+                <div className="img">
+                  <img src={goodInfo.goods_image} alt=""/>
+                </div>
+                <div className="message">
+                  <span className="popup-price">
+                    <em>¥</em>{goodInfo.goods_price}
+                  </span>
+                  <span className="popup-stock">库存{goodInfo.goods_storage}件</span>
+                  <span className="popup-cont">
+                    <em>已选：</em>{goodInfo.goods_name}
+                  </span>
+                  <div></div>
+                </div>
               </div>
+            </div>
+            <div className="parmas">
+              <div className="mes">
+                <div className="title">颜色</div>
+                <div className="item">
+                  <span className="active">960p</span> <span>720p</span>
+                </div>
+              </div>
+              <div className="mes">
+                <div className="title">颜色</div>
+                <div className="item">
+                  <span className="active">960p</span> <span>720p</span>
+                </div>
+              </div>
+              <div className="mes">
+                <div className="title">颜色</div>
+                <div className="item">
+                  <span className="active">960p</span> <span>720p</span>
+                </div>
+              </div>
+              <div className="popup-count">
+                <div className="popup-ctl">
+                  <span className="popup-txt2">已选择</span>
+                  <span className="x-mgt">旋转摄像头无线摄像头wifi智能网络监控器手机远程家用高清夜视一体机 960P 3.6mm 7天无理由退货</span>
+                </div>
+                <div className="quantity-wrapper">
+                  <span className="quantity-decrease1" onClick={this.changeNum.bind(this,'sub')}>
+                    <em className="reduce1"></em>
+                  </span>
+                  <input type="text" readOnly className="quantity" value={addToCart.num}/>
+                  <span className="quantity-decrease2" onClick={this.changeNum.bind(this,'add')}>
+                    <em className="plus"></em>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="sure">
+              <span>确定</span>
             </div>
           </div>
         </Modal>

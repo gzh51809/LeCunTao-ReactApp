@@ -39,8 +39,10 @@ class Search extends React.Component {
       url: '/api/lct?api_version=2.3.0&platType=2&client=wap&isEncry=0&time=1549698503924&act=goods&op=hotWord'
     }).then(res => {
       if(this.props.history.location.pathname.indexOf('/search') === -1) return
+      let his = sessionStorage.getItem('history') !==null ? sessionStorage.getItem('history').split('-') : []
       this.setState({
-        hotItem: res.data.datas.list
+        hotItem: res.data.datas.list,
+        hisItem: his
       })
     }).catch(err => {
       console.log(err)
@@ -61,9 +63,10 @@ class Search extends React.Component {
   // 搜索关键词
   pushToList (keyword) {
     if (keyword) {
-      // let se = sessionStorage.getItem('history')
-      // se = se + "-" + keyword
-      // sessionStorage.setItem('history', se)
+      let arr = this.state.hisItem
+      arr.push(keyword)
+      if (arr.length > 10) arr.shift() 
+      sessionStorage.setItem('history', arr.join('-'))
       this.props.history.push({pathname:"/list/" + keyword})
     }
   }
@@ -138,6 +141,8 @@ class Search extends React.Component {
             <div className="clearHis" onClick={() => {
               this.setState({
                 hisItem: []
+              }, () => {
+                sessionStorage.removeItem('history')
               })
             }}>
               <i></i>清空
@@ -147,10 +152,10 @@ class Search extends React.Component {
             {
               hisItem.map((item,index) => {
                 return (
-                  <li key={index} onClick={
+                  <li key={index} onClick={() => {
                     // 搜索历史搜索
                     this.pushToList(item)
-                  }>{item}</li>
+                  }}>{item}</li>
                 )
               })
             }

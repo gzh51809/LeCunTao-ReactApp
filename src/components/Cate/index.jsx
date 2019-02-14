@@ -73,9 +73,7 @@ class Cate extends React.Component {
     let { cateName, page, cateContent } = this.state
     return (
       <div id="cate">
-        <Seacrh toSearch={()=> {
-          this.props.history.push('/search')
-        }}/>
+        <Seacrh toSearch={()=> {this.props.history.push('/search')}} back={() => {this.props.history.goBack()}}/>
         <div className="cateBody">
           <ul className="cateName">
             {
