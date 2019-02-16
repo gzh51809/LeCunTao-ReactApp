@@ -7,10 +7,10 @@ export function addToCart (object) {
   }
 }
 
-export function removeGood (cartId) {
+export function removeGood (idArr) {
   return {
     type: REMOVE_GOOD,
-    payload: cartId
+    payload: idArr
   }
 }
 

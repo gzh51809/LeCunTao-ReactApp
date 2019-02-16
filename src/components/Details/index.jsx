@@ -88,7 +88,7 @@ class Details extends React.Component {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }).then(res => {
-          console.log(res)
+          // console.log(res)
           if(this.props.history.location.pathname.indexOf('/details') === -1) return
           this.setState({
             store_Mess: res.data.datas
@@ -146,6 +146,7 @@ class Details extends React.Component {
         })
       }).catch(err => {
         console.log(err)
+        if(this.props.history.location.pathname.indexOf('/details') === -1) return
         this.setState({
           loadKey: true
         })
@@ -154,20 +155,18 @@ class Details extends React.Component {
   }
 
   componentDidMount() {
+    this.props.history.listen(route => {
+      // 监听路由变化 更新视图
+      console.log(route)
+      if(this.props.history.location.pathname.indexOf('/details') === -1) return
+      this.requestGoodMess(this.props.match.params.id)
+    })
     this.setState({
       obj: this.refs.obj
     })
     // 请求商品信息
     this.requestGoodMess(this.props.match.params.id)
   }
-
-  componentWillReceiveProps(nextProps) {
-    // if (nextProps.history) return
-    let {id} = nextProps.match.params;
-    console.log(nextProps)
-    // 请求详情页数据 
-    this.requestGoodMess(id)
-  } 
 
   // 点击头部导航跳转到指定位置
   toXy (index) {

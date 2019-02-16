@@ -15,7 +15,10 @@ let initialState = {
         {sp_name: "产地", sp_value_name: "中国大陆"},
         {sp_name: "品牌", sp_value_name: "lovefun/拉芳"},
         {sp_name: "净含量", sp_value_name: "120ml*3"}
-      ]
+      ],
+      goods_storage: 499,
+      store_id: 4753,
+      store_name: "拉芳旗舰店"
     },
     {
       cartId: 1,
@@ -32,8 +35,7 @@ let initialState = {
         {sp_name: "规格", sp_value_name: "220g/盒（黑米味）"}
       ]
     }
-  ],
-  count: 2
+  ]
 }
 
 const cartList = (state = initialState, action) => {
@@ -51,7 +53,9 @@ const cartList = (state = initialState, action) => {
     case REMOVE_GOOD: 
       return {
         ...state,
-        cartList: cartList.filter(item =>　item.cartId !== action.payload.cartId)
+        cartList: state.cartList.filter(item =>{
+          return action.payload.indexOf(item.cartId)
+        })
       }
     
     case UPDATE_QTY: 

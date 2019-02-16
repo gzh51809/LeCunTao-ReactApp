@@ -40,15 +40,14 @@
         display: inline-block;
         width: 0.4rem;
         height: 0.4rem;
-        content: '';
         border: 1px solid #c0c0c0;
         border-radius: 0.2rem;
       }
       .active {
         position: absolute;
-        display: block;
-        top: 0.04rem;
-        left: 0.14rem;
+        display: none;
+        top: 0.05rem;
+        left: 0.16rem;
         box-sizing: border-box;
         width: 0.12rem;
         height: 0.26rem;
@@ -58,6 +57,15 @@
         border-color: #fff;
         border-top: 0;
         border-left: 0;
+      }
+    }
+    .check {
+      .bottom {
+        border-color: #fd5500;
+        background: #fd5500
+      }
+      .active {
+        display: block;
       }
     }
     .cart-litem-list {

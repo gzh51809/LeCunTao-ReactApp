@@ -23,4 +23,120 @@
     font-size: 0.34rem;
     color: #4c4c4c;
   }
+  .shop-settlement {
+    height: 0.96rem;
+    border-top: 0.02rem solid #ccc;
+    position: fixed;
+    left: 0;
+    bottom: 1rem;
+    background: #fff;
+    z-index: 10;
+    width: 100%;
+    .set-lwp {
+      float: left;
+      height: 100%;
+      width: 65%;
+      padding-left: 0.18rem;
+      .set-sel {
+        float: left;
+        input {
+          float: left;
+          margin-top: 0.36rem;
+          display: none;
+        }
+        .ck_c {
+          width: 0.4rem;
+          height: 0.4rem;
+          cursor: pointer;
+          position: relative;
+          margin-top: 0.26rem;
+          float: left;
+          .bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            width: 0.4rem;
+            height: 0.4rem;
+            border: 1px solid #c0c0c0;
+            border-radius: 0.2rem;
+          }
+          .active {
+            top: 0.05rem;
+            left: 0.16rem;
+            box-sizing: border-box;
+            width: 0.12rem;
+            height: 0.26rem;
+            transform: rotate(45deg);
+            border-width: 2px;
+            border-style: solid;
+            border-color: #fff;
+            border-top: 0;
+            border-left: 0;
+            display: none;
+            position: absolute;
+          }
+        }
+        .check {
+          >.bottom {
+            border-color: #fd5500;
+            background: #fd5500
+          }
+          >.active {
+            display: block;
+          }
+        }
+        .text {
+          font-size: 0.3rem;
+          color: #333;
+          line-height: 0.96rem;
+          padding-left: 0.2rem;
+          float: left;
+        }
+      }
+      .set-price {
+        float: right;
+        .price-total {
+          margin-top: 0.16rem;
+          font-size: 0.3rem;
+          .total-txt {
+            color: #333;
+          }
+          .price-r {
+            color: #f81234;
+            i {
+              font-style: normal;
+            }
+          }
+        }
+        .set-freight {
+          float: right;
+          color: #999;
+          font-size: 0.3rem;
+        }
+      }
+    }
+    .set-rwp {
+      float: right;
+      width: 29%;
+      .btn-sub {
+        width: 100%;
+        height: 0.96rem;
+        text-align: center;
+        line-height: 0.96rem;
+        background: #fb0a84;
+        color: #fff;
+        font-size: 0.28rem;
+      }
+      .btn-del {
+        width: 100%;
+        height: 0.96rem;
+        text-align: center;
+        line-height: 0.96rem;
+        background: #fb0a84;
+        color: #fff;
+        font-size: 0.28rem;
+      }
+    }
+  }
 }

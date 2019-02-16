@@ -6,42 +6,49 @@ import './cartitem.scss'
 
 class CartItem extends React.Component {
   render () {
-    let list = this.props.item
+    let { list, store_name,index} = this.props.item
     return (
       <div className="shop-group">
         <div className="cart-list-wp">
           <div className="cart-shop-name">
             <div className="goods-cart">
               <input type="checkbox" id="box1"/>
-              <label htmlFor="box1" className="ck_c">
-                <span className="bottom" style={{border: "#fd5500",background: "#fd5500"}}></span>
-                <span className="active"></span>
+              <label htmlFor="box1" className={list.every(item => item.active === true) ? 'ck_c check' : 'ck_c'} onClick={() => {
+                this.props.checkstore(index)
+              }}>
+                <span className="bottom" ></span>
+                <span className="active" ></span>
               </label>
-              <span>乐村淘韶关市特色馆</span>
+              <span>{store_name}</span>
             </div>
           </div>
           <ul className="cart-litem-list">
             {
-              list.map((item,index) => {
+              list.map((item,idx) => {
                 return (
-                  <li key={index}>
+                  <li key={idx}>
                     <SwipeAction
                       style={{ backgroundColor: 'gray' }}
                       autoClose
                       right={[
                         {
                           text: '删除',
-                          onPress: () => console.log('delete'),
+                          onPress: () => {
+                            this.props.removeGoods([item.cartId])
+                          },
                           style: { backgroundColor: '#E2421B', color: 'white', fontSize: '0.38rem'},
                         }
                       ]}
-                      onOpen={() => console.log('global open')}
-                      onClose={() => console.log('global close')}
                     >
                       <div className="items-wl">
                         <input type="checkbox" className="edit-inp" id="good"/>
-                        <label htmlFor="good" className="ck_c">
-                          <span className="bottom" style={{border: "#fd5500",background: "#fd5500"}}></span>
+                        <label 
+                          htmlFor="good" 
+                          className={item.active ? 'ck_c check' : 'ck_c'} 
+                          onClick={() => {
+                            this.props.checkGood(index,idx)
+                          }}>
+                          <span className="bottom"></span>
                           <span className="active"></span>
                         </label>
                         <div className="it-img">
@@ -66,11 +73,15 @@ class CartItem extends React.Component {
                               <span className="current-price"><i>¥</i> <span>{item.goods_price}</span></span>
                             </div>
                             <div className="quantity-wrapper">
-                              <span className="quantity-decrease1">
+                              <span className="quantity-decrease1" onClick={() => {
+                                this.props.changeNum(index,idx,'sub')
+                              }}>
                                 <em className="reduce1"></em>
                               </span>
                               <input type="text" className="quantity" readOnly value={item.goods_num}/>
-                              <span className="quantity-decrease2">
+                              <span className="quantity-decrease2" onClick={() => {
+                                this.props.changeNum(index,idx,'add')
+                              }}>
                                 <em className="plus"></em>
                               </span>
                             </div>
