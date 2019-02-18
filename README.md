@@ -17,7 +17,7 @@
 | 包管理工具     | npm                |
 
 ### 目录
-\根目录
+\根目录 <br/>
 ├── README.md					项目说明文档 <br/>
 ├── package.json				模块描述文件 <br/>
 ├── package-lock.json			模块版本锁定文件 <br/>
