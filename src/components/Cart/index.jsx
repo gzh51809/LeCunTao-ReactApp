@@ -154,7 +154,7 @@ class Cart extends React.Component {
     let idArr = []
     let cartList = this.state.cartList
     if (arr === 'more') {  // 删除多个
-      cartList.forEach(ele =>{
+      cartList.forEach((ele,idx) =>{
         ele.list.forEach((item,index) => {
           if (item.active === true) {
             idArr.push(item.cartId)
@@ -169,11 +169,13 @@ class Cart extends React.Component {
             ele.list.splice(index,1)
           }
         })
-        if (ele.list.length === 0) cartList.splice(idx,1)
       })
       idArr = arr
     }
     if (idArr.length === 0) return
+    for(var i=cartList.length-1;i>=0;i--) {
+      if (cartList[i].list.length === 0) cartList.splice(i,1)
+    }
     this.setState({
       cartList
     }, () => {

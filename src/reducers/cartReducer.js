@@ -54,6 +54,7 @@ const cartList = (state = initialState, action) => {
       return {
         ...state,
         cartList: state.cartList.filter(item =>{
+          console.log(action.payload)
           return action.payload.indexOf(item.cartId)
         })
       }
